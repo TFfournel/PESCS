@@ -7,6 +7,7 @@ public class ShootMousePos: MonoBehaviour
 {
     public Weapon currentWeaponprefab;
     [HideInInspector] public Weapon currentWeaponInstance;
+    public bool directionToForward = true;
 
     private void Start()
     {
@@ -27,6 +28,10 @@ public class ShootMousePos: MonoBehaviour
     private void SetDirection(Vector3 pTargetPos)
     {
         Vector3 lDirection = VectorExtensions.Direction(transform.position,pTargetPos);
+        if(directionToForward)
+        {
+            lDirection = transform.forward;
+        }
         transform.rotation = Quaternion.LookRotation(lDirection,transform.up);
     }
 }
