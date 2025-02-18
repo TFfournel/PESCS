@@ -27,11 +27,11 @@ public class ShootMousePos : MonoBehaviour
 
     private void SetDirection(Vector3 pTargetPos)
     {
-        Vector3 lDirection = VectorExtensions.Direction(transform.position, pTargetPos);
-        if (directionToForward)
+        Vector3 lDirection = VectorExtensions.Direction(transform.position,pTargetPos);
+        if(directionToForward)
         {
             lDirection = transform.forward;
         }
-        transform.rotation = Quaternion.LookRotation(lDirection, transform.up);
+        transform.rotation = Quaternion.LookRotation(lDirection,transform.up);
     }
 }
