@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -58,6 +59,11 @@ public class Weapon: MonoBehaviour
     {
         SpawnBullet(bulletPrefab,transform.position,transform.forward);
         CountingRemainingBullet();
+        timer.SetTimeUse(State.None,OnShootDelayEnd,ComputeDelay(),false);
+    }
+
+    private void OnShootDelayEnd()
+    {
     }
 
     private void CountingRemainingBullet()

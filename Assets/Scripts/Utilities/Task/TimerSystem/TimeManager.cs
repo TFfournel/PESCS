@@ -26,6 +26,8 @@ public class TimeManager: MonoBehaviour
         float lTargetTime;
         foreach(TimeUse lTimeUse in allActiveTimeUse)
         {
+            if(!lTimeUse.CheckIfActive())
+                continue;
             lTargetTime = lTimeUse.apparitionTime + lTimeUse.delay;
 
             if(elapsedTime >= lTargetTime)
