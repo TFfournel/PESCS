@@ -115,9 +115,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2641749691371046581}
   - component: {fileID: 1562540923954963732}
-  - component: {fileID: 1396909801698486943}
   m_Layer: 0
-  m_Name: BulletBase
+  m_Name: NormalBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,17 +153,3 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   speed: 500
   damage: 50
---- !u!114 &1396909801698486943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7506380230868553527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c90e2ae997882f4b8eb3acf06964908, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: {x: 0, y: 0, z: 0}
-  speed: 0

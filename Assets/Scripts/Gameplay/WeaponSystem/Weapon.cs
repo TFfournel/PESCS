@@ -34,10 +34,10 @@ public class Weapon: MonoBehaviour
         get => burstBulletAmount == 1 ? burstDelay : intraBurstBulletDelay;
     }    // Start is called before the first frame update
 
-    private void Relaod()
+    private void Reload()
     {
         reloading = true;
-        timer.SetTimeUse(State.CallOnce,EndingReload,ComputeDelay(),true);
+        timer.SetTimeUse(State.None,EndingReload,ComputeDelay(),true);
     }
 
     private void EndingReload()
@@ -51,6 +51,7 @@ public class Weapon: MonoBehaviour
         if(timer.CheckIfActive())
             return;
         Shoot();
+        Debug.Log("shoot");
     }
 
     private void Shoot()
@@ -75,7 +76,7 @@ public class Weapon: MonoBehaviour
     {
         if(autoReload)
         {
-            Relaod();
+            Reload();
             return true;
         }
 
@@ -95,7 +96,7 @@ public class Weapon: MonoBehaviour
 
     private void Start()
     {
-        TimeUse timer = TimeUse.AddTimeUse(gameObject,Shoot,State.CallOnce,ComputeDelay(),false);
+        timer = TimeUse.AddTimeUse(gameObject,Shoot,State.None,ComputeDelay(),false);
     }
 
     // Update is called once per frame

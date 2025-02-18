@@ -32,16 +32,16 @@ public class TimeUse: MonoBehaviour
         if(MethodCall != null)
             MethodCall();
         OnEventFired?.Invoke(this,new EventArgs());
+        SetActive(false);
         if(destroyAfterUse)
         {
             Destroy(this);
             return;
         }
 
-        activated = false;
         if(state == State.CallEveryXTime)
         {
-            SetActive();
+            SetActive(true);
         }
     }
 
@@ -60,7 +60,7 @@ public class TimeUse: MonoBehaviour
     {
     }
 
-    public void SetActive(bool pActive = true)
+    public void SetActive(bool pActive)
     {
         if(pActive)
         {
@@ -83,7 +83,7 @@ public class TimeUse: MonoBehaviour
     public static TimeUse AddTimeUse(GameObject pContainer,Action pMethodToCall,State pState,float pDelay,bool pAutoStart = true,bool pDestroyAfterUse = false)
     {
         TimeUse lTimeUse = pContainer.AddComponent<TimeUse>();
-        lTimeUse.SetTimeUse(pState,pMethodToCall,pDelay);
+        lTimeUse.SetTimeUse(pState,pMethodToCall,pDelay,pDestroyAfterUse);
         TimeManager.GetInstance().allActiveTimeUse.Add(lTimeUse);
         return lTimeUse;
     }
@@ -94,5 +94,6 @@ public class TimeUse: MonoBehaviour
         state = pState;
         destroyAfterUse = pDestroyAfterUse;
         delay = pDelay;
+        apparitionTime = TimeManager.GetElapsedTime();
     }
 }

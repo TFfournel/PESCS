@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Moving: MonoBehaviour
 {
-    public Vector3 direction;
+    [HideInInspector] public Vector3 direction;
 
     public float speed;
 
@@ -55,6 +55,6 @@ public class Moving: MonoBehaviour
 
     private void Movement(Vector3 pVelocity)
     {
-        transform.position += pVelocity;
+        transform.position += pVelocity * Time.deltaTime;
     }
 }

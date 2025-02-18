@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba9f4c6fd1dda24bae98e9e9a489fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 7506380230868553527, guid: 87c58297a7a138d44a642d16fd521130, type: 3}
   totalAmo: 100
   burstBulletAmount: 1
-  burstDelay: 1
-  intraBurstBulletDelay: 0
-  reloadTime: 0
-  magSize: 0
+  burstDelay: 2
+  intraBurstBulletDelay: 2
+  reloadTime: 2
+  magSize: 30
   autoReload: 1
