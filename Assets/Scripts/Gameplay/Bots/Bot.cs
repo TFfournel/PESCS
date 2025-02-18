@@ -40,8 +40,6 @@ public class Bot : MonoBehaviour
     {
         PathFinding();
         DebugPathRay();
-
-
     }
 
     private void PathFinding()
@@ -67,7 +65,6 @@ public class Bot : MonoBehaviour
             return;
         }
 
-        // Draw lines between consecutive points
         for (int i = 0; i < lPath.Length - 1; i++)
         {
             Debug.DrawLine(lPath[i], lPath[i + 1], Color.green);

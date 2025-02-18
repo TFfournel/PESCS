@@ -37,7 +37,7 @@ public class Weapon: MonoBehaviour
     private void Relaod()
     {
         reloading = true;
-        timer.SetTimeUse(State.CallOnce,EndingReload,ComputeDelay(),true);
+        //timer.SetTimeUse(State.CallOnce,EndingReload,ComputeDelay(),true);
     }
 
     private void EndingReload()
@@ -95,7 +95,7 @@ public class Weapon: MonoBehaviour
 
     private void Start()
     {
-        TimeUse timer = TimeUse.AddTimeUse(gameObject,Shoot,State.CallOnce,ComputeDelay(),false);
+        //TimeUse timer = TimeUse.AddTimeUse(gameObject,Shoot,State.CallOnce,ComputeDelay(),false);
     }
 
     // Update is called once per frame
