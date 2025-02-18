@@ -20,7 +20,7 @@ public class Bullet: Moving
 
     protected virtual void Init(Vector3 pDirection,float pSpeed,float pDamage)
     {
-        base.Init(pDirection,pSpeed);
+        base.Init(pDirection,pSpeed,true);
         damage = pDamage;
     }
 

@@ -16,10 +16,13 @@ public class Moving: MonoBehaviour
         private set => velocity = value;
     }
 
-    protected virtual void Init(Vector3 pDirection,float pSpeed)
+    public bool faceDirection = true;
+
+    protected virtual void Init(Vector3 pDirection,float pSpeed,bool pfaceDirection)
     {
         direction = pDirection;
         speed = pSpeed;
+        faceDirection = pfaceDirection;
     }
 
     public void SetMoving(Vector3 pDirection,float pSpeed)
@@ -56,5 +59,9 @@ public class Moving: MonoBehaviour
     private void Movement(Vector3 pVelocity)
     {
         transform.position += pVelocity * Time.deltaTime;
+        if(faceDirection)
+        {
+            transform.rotation = Quaternion.LookRotation(pVelocity.normalized);
+        }
     }
 }
