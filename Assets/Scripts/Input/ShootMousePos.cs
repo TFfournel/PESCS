@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class ShootMousePos: MonoBehaviour
 {
-    private Weapon currentWeapon;
+    public Weapon currentWeaponprefab;
+    [HideInInspector] public Weapon currentWeaponInstance;
 
     private void Start()
     {
-        currentWeapon = GetComponent<Weapon>();
+        currentWeaponInstance = Instantiate(currentWeaponprefab.gameObject).GetComponent<Weapon>();
     }
 
     // Update is called once per frame
@@ -18,7 +19,8 @@ public class ShootMousePos: MonoBehaviour
         if(Input.GetMouseButtonDown((int)MouseButton.Left))
         {
             SetDirection(Input.mousePosition);
-            currentWeapon.ShootRequest();
+            currentWeaponInstance.ShootRequest();
+            Debug.Log("change direction");
         }
     }
 

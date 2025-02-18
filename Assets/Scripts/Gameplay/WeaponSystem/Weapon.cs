@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,10 +35,10 @@ public class Weapon: MonoBehaviour
         get => burstBulletAmount == 1 ? burstDelay : intraBurstBulletDelay;
     }    // Start is called before the first frame update
 
-    private void Relaod()
+    private void Reload()
     {
         reloading = true;
-        //timer.SetTimeUse(State.CallOnce,EndingReload,ComputeDelay(),true);
+        timer.SetTimeUse(State.None,EndingReload,ComputeDelay(),true);
     }
 
     private void EndingReload()
@@ -51,12 +52,18 @@ public class Weapon: MonoBehaviour
         if(timer.CheckIfActive())
             return;
         Shoot();
+        Debug.Log("shoot");
     }
 
     private void Shoot()
     {
         SpawnBullet(bulletPrefab,transform.position,transform.forward);
         CountingRemainingBullet();
+        timer.SetTimeUse(State.None,OnShootDelayEnd,ComputeDelay(),false);
+    }
+
+    private void OnShootDelayEnd()
+    {
     }
 
     private void CountingRemainingBullet()
@@ -75,7 +82,7 @@ public class Weapon: MonoBehaviour
     {
         if(autoReload)
         {
-            Relaod();
+            Reload();
             return true;
         }
 
@@ -95,7 +102,7 @@ public class Weapon: MonoBehaviour
 
     private void Start()
     {
-        //TimeUse timer = TimeUse.AddTimeUse(gameObject,Shoot,State.CallOnce,ComputeDelay(),false);
+        timer = TimeUse.AddTimeUse(gameObject,Shoot,State.None,ComputeDelay(),false);
     }
 
     // Update is called once per frame
