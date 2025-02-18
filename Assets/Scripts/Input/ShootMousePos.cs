@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ShootMousePos: MonoBehaviour
+public class ShootMousePos : MonoBehaviour
 {
     public Weapon currentWeaponprefab;
     [HideInInspector] public Weapon currentWeaponInstance;
+    public bool directionToForward = true;
 
     private void Start()
     {
@@ -16,7 +17,7 @@ public class ShootMousePos: MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(Input.GetMouseButtonDown((int)MouseButton.Left))
+        if (Input.GetMouseButtonDown((int)MouseButton.Left))
         {
             SetDirection(Input.mousePosition);
             currentWeaponInstance.ShootRequest();
@@ -26,7 +27,11 @@ public class ShootMousePos: MonoBehaviour
 
     private void SetDirection(Vector3 pTargetPos)
     {
-        Vector3 lDirection = VectorExtensions.Direction(transform.position,pTargetPos);
-        transform.rotation = Quaternion.LookRotation(lDirection,transform.up);
+        Vector3 lDirection = VectorExtensions.Direction(transform.position, pTargetPos);
+        if (directionToForward)
+        {
+            lDirection = transform.forward;
+        }
+        transform.rotation = Quaternion.LookRotation(lDirection, transform.up);
     }
 }
