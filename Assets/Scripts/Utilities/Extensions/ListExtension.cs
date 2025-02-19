@@ -56,4 +56,18 @@ public class ListExtension: MonoBehaviour
 
         return list;
     }
+
+    public static List<T> ArrayToList<T>(T[] array)
+    {
+        // If the array is null, return an empty list (or you could throw an exception).
+        if(array == null)
+        {
+            return new List<T>();
+        }
+
+        // Initialize the list with the capacity of the array for better performance.
+        List<T> list = new List<T>(array.Length);
+        list.AddRange(array);
+        return list;
+    }
 }
