@@ -59,7 +59,7 @@ public class Moving: MonoBehaviour
         transform.position += pVelocity * Time.deltaTime;
         if(facingDirection)
         {
-            transform.rotation = Quaternion.LookRotation(transform.forward);
+            transform.rotation = Quaternion.LookRotation(transform.forward,transform.up);
         }
     }
 }

@@ -15,7 +15,7 @@ public class AiValues: MonoBehaviour
     {
         allies.Add(this);
         bot = GetComponentInChildren<Bot>();
-        weapon = GetComponentInChildren<Weapon>();
+        // weapon = GetComponentInChildren<Weapon>();
     }
 
     // Update is called once per frame
