@@ -8,10 +8,12 @@ public class ShootMousePos: MonoBehaviour
     public Weapon currentWeaponprefab;
     [HideInInspector] public Weapon currentWeaponInstance;
     public bool directionToForward = true;
+    public AiValues AiValues;
 
     private void Start()
     {
-        currentWeaponInstance = Instantiate(currentWeaponprefab.gameObject).GetComponent<Weapon>();
+        currentWeaponInstance = Instantiate(currentWeaponprefab.gameObject,transform.position,transform.rotation,transform).GetComponent<Weapon>();
+        AiValues.weapon = currentWeaponInstance;
     }
 
     // Update is called once per frame
