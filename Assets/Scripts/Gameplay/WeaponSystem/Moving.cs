@@ -9,6 +9,7 @@ public class Moving: MonoBehaviour
     public float speed;
 
     private Vector3 velocity;
+    public bool facingDirection = true;
 
     public Vector3 Velocity
     {
@@ -56,5 +57,9 @@ public class Moving: MonoBehaviour
     private void Movement(Vector3 pVelocity)
     {
         transform.position += pVelocity * Time.deltaTime;
+        if(facingDirection)
+        {
+            transform.rotation = Quaternion.LookRotation(transform.forward);
+        }
     }
 }

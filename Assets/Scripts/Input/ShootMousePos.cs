@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ShootMousePos: MonoBehaviour
 {
     public Weapon currentWeaponprefab;
     [HideInInspector] public Weapon currentWeaponInstance;
-    public bool directionToForward = true;
+    public bool directionToForward = false;
     public AiValues AiValues;
+
+    public MouseButton shootOnTargetKey = MouseButton.Left;
+    private Vector3 target;
+    private Ray mouseCollisionRay;
+    private RaycastHit raycastHit;
 
     private void Start()
     {
@@ -19,12 +25,7 @@ public class ShootMousePos: MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(Input.GetMouseButtonDown((int)MouseButton.Left))
-        {
-            SetDirection(Input.mousePosition);
-            currentWeaponInstance.ShootRequest();
-            Debug.Log("change direction");
-        }
+        ShootOnClick();
     }
 
     private void SetDirection(Vector3 pTargetPos)
@@ -34,6 +35,22 @@ public class ShootMousePos: MonoBehaviour
         {
             lDirection = transform.forward;
         }
+
         transform.rotation = Quaternion.LookRotation(lDirection,transform.up);
+    }
+
+    private void ShootOnClick()
+    {
+        if(Input.GetMouseButtonDown((int)shootOnTargetKey))
+        {
+            mouseCollisionRay = CollisionExtensions.MouseCameraRaycast();
+            raycastHit = CollisionExtensions.GetRayData(mouseCollisionRay);
+            GameObject lObjectHit = raycastHit.transform.gameObject;
+            if(lObjectHit is null)
+                return;
+            target = raycastHit.point;
+            SetDirection(target);
+            AiValues.weapon.ShootRequest();
+        }
     }
 }
