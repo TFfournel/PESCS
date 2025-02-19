@@ -33,7 +33,7 @@ public class AiStatePickUpRessources: AiState
         List<Weapon> allFoundObject = ListExtension.LookForType<Weapon>(aiStateManager.aiValues.nearbyObjects);
         if(allFoundObject.Count == 0)
             return;
-        Weapon firstWeapon = allFoundObject[RandomExtension.(allFoundObject.Count)];
+        Weapon firstWeapon = allFoundObject[RandomExtension.RandomInRange(allFoundObject.Count)];
         aiStateManager.aiValues.pathfinding.SetTarget(firstWeapon.transform.position);
     }
 
