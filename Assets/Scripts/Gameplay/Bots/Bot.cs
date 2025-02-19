@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Bot: MonoBehaviour
+public class Bot : MonoBehaviour
 {
+    public enum Team { Red, Blue }
+    public Team CurrentTeam { get; set; }
+
     [Header("Movement")]
     [SerializeField] private float _MaxMovementSpeed;
 
@@ -18,9 +22,6 @@ public class Bot: MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private bool UseTarget = false;
 
-    public Bot()
-    {
-    }
 
     private void Start()
     {
@@ -41,6 +42,7 @@ public class Bot: MonoBehaviour
         DebugPathRay();
     }
 
+    #region PathFinding
     private void PathFinding()
     {
         if(target != null && UseTarget)
@@ -75,4 +77,53 @@ public class Bot: MonoBehaviour
     {
         target = pTransform;
     }
+    #endregion
+
+    #region StateMachine
+
+    #region ChooseWeapon
+    private void SetChooseWeaponState()
+    {
+
+    }
+    private void ChooseWeaponState()
+    {
+
+    }
+    #endregion
+
+    #region ChoosePoint
+    private void SetChoosePointState()
+    {
+
+    }
+    private void ChoosePointState()
+    {
+
+    }
+    #endregion
+
+    #region MoveToPoint
+    private void SetMoveToPointState()
+    {
+
+    }
+    private void MoveToPointState()
+    {
+
+    }
+    #endregion
+
+    #region Opposition
+    private void SetOppositionState()
+    {
+
+    }
+    private void OppositionState()
+    {
+
+    }
+    #endregion
+
+    #endregion
 }
