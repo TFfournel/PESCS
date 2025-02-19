@@ -22,4 +22,11 @@ public class CollisionExtensions: MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         return ray;
     }
+
+    public static RaycastHit GetRayData(Ray pRay)
+    {
+        RaycastHit lRaycastHitData;
+        Physics.Raycast(pRay,out lRaycastHitData);
+        return lRaycastHitData;
+    }
 }

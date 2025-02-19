@@ -15,6 +15,7 @@ public class DebugExtension: MonoBehaviour
     {
     }
 
+    /*
     private void DebugPathRay()
     {
         Vector3[] lPath = agent.path.corners;
@@ -27,5 +28,5 @@ public class DebugExtension: MonoBehaviour
         {
             Debug.DrawLine(lPath[i],lPath[i + 1],Color.green);
         }
-    }
+    }*/
 }

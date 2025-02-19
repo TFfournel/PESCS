@@ -27,6 +27,6 @@ public class AiStateGoToTarget: AiState
 
     protected virtual void SetChangeState()
     {
-        aiStateManager.aiValues.bot.SetTarget(new Transform(target));
+        //  aiStateManager.aiValues.bot.SetTarget(new Transform(target));
     }
 }
