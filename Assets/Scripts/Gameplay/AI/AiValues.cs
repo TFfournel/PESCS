@@ -13,7 +13,7 @@ public class AiValues: MonoBehaviour
     public Weapon weapon;
     public Bot bot;
     public BoxColliderCreationParam pParam;
-    private List<GameObject> nearbyObjects = new List<GameObject>();
+    public List<GameObject> nearbyObjects = new List<GameObject>();
     public Pathfinding pathfinding;
 
     public List<Type> TypeToCheck = new List<Type>()
@@ -35,54 +35,11 @@ public class AiValues: MonoBehaviour
         //CheckNearObjects();
     }
 
-    /// <summary>
-    /// return all isntance of an objec in an other object
-    /// </summary>
-    /// <param name="lType"></param>
-    /// <param name="lList"></param>
-    /// <returns></returns>
-    /*private List<object> GetClass(Type lType,List<object> lList)
+    private void LateUpdate()
     {
-    }
-
-    private void CheckNearObjects()
-    {
+        pParam.center = transform.position;
         nearbyObjects = CollisionExtensions.CheckForNearbyObject(pParam,ShapeType.Box);
-        List<List<object>> allDetectedObject = new List<List<object>>();
     }
-
-    private List<List<object>> allClassChecked(List<GameObject> allGameObject)
-    {
-        List<object> allDetectedObject = new List<object>();
-        List<List<object>> allDetectedClass = new List<List<object>>();
-        int lLength = allGameObject.Count;
-        int lTypeCheckLength = TypeToCheck.Count;
-        object lObject;
-        Type lType;
-        GameObject lGameObject;
-        int lInitializeList = TypeToCheck.Count;
-        /*for(int i = 0 ; i < lInitializeList ; i++)
-        {
-            lType = TypeToCheck[i];
-List<object> lList  = new List<object>();
-allDetectedClass.Add(ListExtension.InitializeList<>());
-        }#1#
-        for(int i = 0 ; i < lLength ; i++)
-        {
-            allDetectedClass.Add(new List<object>());
-            lGameObject = allGameObject[i];
-            for(int j = 0 ; j < lTypeCheckLength ; j++)
-            {
-                lType = TypeToCheck[j];
-                lObject = lGameObject.GetComponent(lType);
-                if(lObject == null)
-                    continue;
-                allDetectedClass[i].Add(lObject);
-            }
-        }
-        return allDetectedClass;
-    }
-    */
 
     private void OnDestroy()
     {

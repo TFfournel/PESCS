@@ -26,7 +26,7 @@ public class Weapon: MonoBehaviour
     private TimeUse timer;
 
     private bool reloading = false;
-    private int remainingBullet;
+    public int remainingBullet;
     private float burstModulo; //set to 0 everytime the delay needs to be burstDelay
     private int countSinceLastBurst;
 

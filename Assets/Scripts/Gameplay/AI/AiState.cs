@@ -12,26 +12,25 @@ public class ChangeStateEventParam: EventArgs
 {
 }
 
-/*
-protected override void Init(AiStateParameter pParam)
-{
-    base.Init(pParam);
-}
+/*protected override void Init(AiStateParameter pParam)
+ {
+     base.Init(pParam);
+ }
 
-protected override void Factor()
-{
-    base.Factor();
-}
+ public override void Factor()
+ {
+     base.Factor();
+ }
 
-protected override void SetChangeState(object pSender,EventArgs pArgs)
-{
-    base.SetChangeState(pSender,pArgs);
-}
+ protected override void SetChangeState()
+ {
+     base.SetChangeState();
+ }
 
-public override void Behaviour()
-{
-    base.Behaviour();
-}*/
+ public override void Behaviour()
+ {
+     base.Behaviour();
+ }*/
 
 public class AiState: MonoBehaviour
 {

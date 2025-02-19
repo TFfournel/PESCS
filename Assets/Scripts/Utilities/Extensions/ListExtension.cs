@@ -15,6 +15,30 @@ public class ListExtension: MonoBehaviour
         return list;
     }
 
+    public static List<T> LookForType<T>(List<GameObject> gameObjects,bool findAll = false) where T : Component
+    {
+        List<T> foundComponents = new List<T>();
+
+        foreach(GameObject obj in gameObjects)
+        {
+            if(obj == null)
+                continue; // Skip null references
+
+            T component = obj.GetComponent<T>();
+            if(component != null)
+            {
+                if(!findAll)
+                {
+                    // If we're only looking for the first match, return immediately
+                    return new List<T> { component };
+                }
+                foundComponents.Add(component);
+            }
+        }
+
+        return foundComponents;
+    }
+
     public static List<T> RemoveXpercentOfList<T>(List<T> pList,float pPercentage,bool RemoveEnd = true)
     {
         List<T> list = new List<T>(pList);

@@ -13,4 +13,10 @@ public class RandomExtension: MonoBehaviour
     public static void MeshPickRandomVertex()
     {
     }
+
+    public static int RandomInRange(int pCount)
+    {
+        int lValue = Random.Range(0,pCount);
+        return lValue;
+    }
 }
