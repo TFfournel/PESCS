@@ -16,4 +16,10 @@ public class CollisionExtensions: MonoBehaviour
     public static ColliderHit HitMousePos(Vector3 pStartPosition,)
     {
     }*/
+
+    public static Ray MouseCameraRaycast()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        return ray;
+    }
 }
