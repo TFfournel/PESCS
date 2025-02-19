@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ShootMousePos: MonoBehaviour
+public class ShootMousePos : MonoBehaviour
 {
     public Weapon currentWeaponprefab;
     [HideInInspector] public Weapon currentWeaponInstance;
@@ -17,7 +17,7 @@ public class ShootMousePos: MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(Input.GetMouseButtonDown((int)MouseButton.Left))
+        if (Input.GetMouseButtonDown((int)MouseButton.Left))
         {
             SetDirection(Input.mousePosition);
             currentWeaponInstance.ShootRequest();
