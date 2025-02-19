@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ListExtension: MonoBehaviour
 {
@@ -55,6 +56,11 @@ public class ListExtension: MonoBehaviour
         list.RemoveRange(startIndex,elementsToRemove);
 
         return list;
+    }
+
+    public static List<Type> TypeList()
+    {
+        return new List<Type>();
     }
 
     public static List<T> ArrayToList<T>(T[] array)
