@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using System;
+using UnityEngine.AI;
 
 public class AiValues: MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class AiValues: MonoBehaviour
     public Bot bot;
     public BoxColliderCreationParam pParam;
     private List<GameObject> nearbyObjects = new List<GameObject>();
+    public Pathfinding pathfinding;
 
     public List<Type> TypeToCheck = new List<Type>()
     {
@@ -30,13 +32,18 @@ public class AiValues: MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        CheckNearObjects();
+        //CheckNearObjects();
     }
 
-    /*
-    private object GetClass(Type lType,List<object> lList)
+    /// <summary>
+    /// return all isntance of an objec in an other object
+    /// </summary>
+    /// <param name="lType"></param>
+    /// <param name="lList"></param>
+    /// <returns></returns>
+    /*private List<object> GetClass(Type lType,List<object> lList)
     {
-    }*/
+    }
 
     private void CheckNearObjects()
     {
@@ -59,7 +66,7 @@ public class AiValues: MonoBehaviour
             lType = TypeToCheck[i];
 List<object> lList  = new List<object>();
 allDetectedClass.Add(ListExtension.InitializeList<>());
-        }*/
+        }#1#
         for(int i = 0 ; i < lLength ; i++)
         {
             allDetectedClass.Add(new List<object>());
@@ -75,6 +82,7 @@ allDetectedClass.Add(ListExtension.InitializeList<>());
         }
         return allDetectedClass;
     }
+    */
 
     private void OnDestroy()
     {

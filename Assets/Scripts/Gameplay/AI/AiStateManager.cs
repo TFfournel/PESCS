@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AiStateManager: MonoBehaviour
 {
-    private List<AiState> aiStates = new List<AiState>();
+    public List<AiState> aiStates = new List<AiState>();
     private List<AiState> AiStateCurrent = new List<AiState>();
     public AiValues aiValues;
 
@@ -41,7 +41,7 @@ public class AiStateManager: MonoBehaviour
         {
             lState = pAllStates[i];
 
-            lState.ChangeToStateFactorCompute();
+            lState.Factor();
         }
     }
 
@@ -52,7 +52,8 @@ public class AiStateManager: MonoBehaviour
         for(int i = 0 ; (i) < lLength ; i++)
         {
             lState = pAllStates[i];
-
+            if(!lState.stateActive)
+                return;
             lState.Behaviour();
         }
     }

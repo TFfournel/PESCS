@@ -12,32 +12,56 @@ public class ChangeStateEventParam: EventArgs
 {
 }
 
-public class AiState
+/*
+protected override void Init(AiStateParameter pParam)
+{
+    base.Init(pParam);
+}
+
+protected override void Factor()
+{
+    base.Factor();
+}
+
+protected override void SetChangeState(object pSender,EventArgs pArgs)
+{
+    base.SetChangeState(pSender,pArgs);
+}
+
+public override void Behaviour()
+{
+    base.Behaviour();
+}*/
+
+public class AiState: MonoBehaviour
 {
     public float changeToStateFactor;
-    public Action behaviourAction = null;
-    public Action ChangeToStateFactorCompute = null;
+    private Action behaviourAction = null;
+    private Action ChangeToStateFactorCompute = null;
     public AiStateManager aiStateManager;
     public bool stateActive = false;
     public EventHandler ChangeToState;
+    public float targetValueToChangeToState = 1;
+    public bool stopCalculatingFactorWhenActive = true;
 
     protected virtual void Init(AiStateParameter pParam)
     {
-        ChangeToState += SetChangeState;
+        ChangeToStateFactorCompute = Factor;
     }
 
-    protected virtual void Factor()
+    public virtual void Factor()
     {
         if(ChangeToStateFactorCompute != null)
             ChangeToStateFactorCompute();
-        if(changeToStateFactor == 1)
+        if(changeToStateFactor >= targetValueToChangeToState)
         {
             stateActive = true;
             ChangeToState?.Invoke(this,new EventArgs());
+            SetChangeState();
         }
     }
 
-    protected virtual void SetChangeState(object pSender,EventArgs pArgs)
+    protected virtual void SetChangeState()
     {
         stateActive = true;
     }
