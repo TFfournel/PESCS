@@ -55,6 +55,13 @@ public class Weapon: MonoBehaviour
         Debug.Log("shoot");
     }
 
+    public void ShootOnPosRequest(Vector3 pPosition)
+    {
+        Quaternion lRotation = Quaternion.LookRotation(VectorExtensions.Direction(transform.position,pPosition).normalized);
+        transform.rotation = lRotation;
+        ShootRequest();
+    }
+
     private void Shoot()
     {
         SpawnBullet(bulletPrefab,transform.position,transform.forward);

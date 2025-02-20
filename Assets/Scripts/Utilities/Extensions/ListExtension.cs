@@ -15,6 +15,48 @@ public class ListExtension: MonoBehaviour
         return list;
     }
 
+    public static List<T> LookForType<T>(List<T> objects,bool findAll = false)
+    {
+        List<T> foundItems = new List<T>();
+
+        foreach(T obj in objects)
+        {
+            // Check if the object is of type T
+            if(obj is T item)
+            {
+                if(!findAll)
+                {
+                    // If only the first match is needed, return immediately.
+                    return new List<T> { item };
+                }
+                foundItems.Add(item);
+            }
+        }
+
+        return foundItems;
+    }
+
+    public static List<T> LookForType<T>(List<object> objects,bool findAll = false)
+    {
+        List<T> foundItems = new List<T>();
+
+        foreach(object obj in objects)
+        {
+            // Check if the object is of type T
+            if(obj is T item)
+            {
+                if(!findAll)
+                {
+                    // If only the first match is needed, return immediately.
+                    return new List<T> { item };
+                }
+                foundItems.Add(item);
+            }
+        }
+
+        return foundItems;
+    }
+
     public static List<T> LookForType<T>(List<GameObject> gameObjects,bool findAll = false) where T : Component
     {
         List<T> foundComponents = new List<T>();

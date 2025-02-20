@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,28 @@ public class AiStateManager: MonoBehaviour
             lState.aiStateManager = this;
             lState.CustomStart();
         }
+    }
+
+    public List<AiState> FindDerivedStates(Type targetType)
+    {
+        // Ensure the targetType is a subclass of AiState
+        if(!typeof(AiState).IsAssignableFrom(targetType))
+        {
+            throw new ArgumentException($"{targetType.Name} is not a subclass of AiState.");
+        }
+
+        var foundStates = new List<AiState>();
+
+        foreach(var state in aiStates)
+        {
+            // Check if the object can be cast to the desired type
+            if(state != null && targetType.IsInstanceOfType(state))
+            {
+                foundStates.Add(state);
+            }
+        }
+
+        return foundStates;
     }
 
     private void ComputeEachAiStateFactor(List<AiState> pAllStates)

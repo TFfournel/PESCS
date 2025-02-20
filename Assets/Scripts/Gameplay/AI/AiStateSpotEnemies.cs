@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class AiStateSpotEnemies: AiState
 {
-    private Dictionary<int,GameObject> enemyDictionnary = new Dictionary<int,GameObject>();
+    public List<AiStateManager> allEnemies = new List<AiStateManager>();
+    public float gainingSpeed = .3f;
+    public int nearEnemies = 0;
 
     protected override void Init(AiStateParameter pParam)
     {
@@ -14,17 +16,14 @@ public class AiStateSpotEnemies: AiState
     public override void Factor()
     {
         base.Factor();
+        changeToStateFactor += gainingSpeed * Time.deltaTime;
     }
 
     protected override void SetChangeState()
     {
         base.SetChangeState();
-        List<AiStateManager> allFoundObject = ListExtension.LookForType<AiStateManager>(aiStateManager.aiValues.nearbyObjects);
-        if(allFoundObject.Count == 0)
-            return;
-        DictionnaryExtensions.ListToDictionary<int,AiStateManager>();
-        AiStateManager firstWeapon = allFoundObject[RandomExtension.RandomInRange(allFoundObject.Count)];
-        aiStateManager.aiValues.pathfinding.SetTarget(firstWeapon.transform.position);
+        allEnemies = ListExtension.LookForType<AiStateManager>(aiStateManager.aiValues.nearbyObjects);
+        nearEnemies = allEnemies.Count;
     }
 
     public override void Behaviour()
