@@ -1,9 +1,9 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class AiStatePickUpRessources: AiState
+public class StatePickUpRessources: AiState
 {
     private int weaponRemainingAmo;
     public float missingAmoMultiplier;
@@ -41,4 +41,4 @@ public class AiStatePickUpRessources: AiState
     {
         base.Behaviour();
     }
-}
+}*/

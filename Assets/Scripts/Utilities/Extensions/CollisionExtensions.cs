@@ -35,6 +35,26 @@ public class SphereColliderCreationParam: ColliderCreationParam
 
 public class CollisionExtensions: MonoBehaviour
 {
+    public static List<RaycastHit> RaycastToObjects(Vector3 pStartPos,List<GameObject> pObjectToCheck)
+    {
+        List<RaycastHit> lHitList = new List<RaycastHit>();
+        int lLength = pObjectToCheck.Count;
+        GameObject lObject;
+        RaycastHit lHit;
+        Ray lRay;
+        Vector3 lDirection;
+        for(int i = 0 ; i < lLength ; i++)
+        {
+            lObject = pObjectToCheck[i];
+            lDirection = VectorExtensions.Direction(pStartPos,lObject.transform.position);
+
+            Physics.Raycast(pStartPos,lDirection.normalized,out lHit,lDirection.magnitude);
+            lHitList.Add(lHit);
+        }
+
+        return lHitList;
+    }
+
     public static Collider AddColliderToObject(GameObject pObject)
     {
         Collider lCollider = pObject.AddComponent<Collider>();

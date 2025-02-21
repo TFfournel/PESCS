@@ -1,12 +1,12 @@
-using System;
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AiStateManager: MonoBehaviour
 {
-    public List<AiState> aiStates = new List<AiState>();
-    private List<AiState> AiStateCurrent = new List<AiState>();
+    public List<State> aiStates = new List<State>();
+    private List<State> AiStateCurrent = new List<State>();
     public AiValues aiValues;
 
     // Start is called before the first frame update
@@ -22,10 +22,10 @@ public class AiStateManager: MonoBehaviour
         ComputeEachAiStateBehaviour(AiStateCurrent);
     }
 
-    private void InitializeEachState(List<AiState> pAllStates)
+    private void InitializeEachState(List<State> pAllStates)
     {
         int lLength = pAllStates.Count;
-        AiState lState;
+        State lState;
         for(int i = 0 ; (i) < lLength ; i++)
         {
             lState = pAllStates[i];
@@ -34,15 +34,15 @@ public class AiStateManager: MonoBehaviour
         }
     }
 
-    public List<AiState> FindDerivedStates(Type targetType)
+    public List<State> FindDerivedStates(Type targetType)
     {
-        // Ensure the targetType is a subclass of AiState
-        if(!typeof(AiState).IsAssignableFrom(targetType))
+        // Ensure the targetType is a subclass of State
+        if(!typeof(State).IsAssignableFrom(targetType))
         {
-            throw new ArgumentException($"{targetType.Name} is not a subclass of AiState.");
+            throw new ArgumentException($"{targetType.Name} is not a subclass of State.");
         }
 
-        var foundStates = new List<AiState>();
+        var foundStates = new List<State>();
 
         foreach(var state in aiStates)
         {
@@ -56,10 +56,10 @@ public class AiStateManager: MonoBehaviour
         return foundStates;
     }
 
-    private void ComputeEachAiStateFactor(List<AiState> pAllStates)
+    private void ComputeEachAiStateFactor(List<State> pAllStates)
     {
         int lLength = pAllStates.Count;
-        AiState lState;
+        State lState;
         for(int i = 0 ; (i) < lLength ; i++)
         {
             lState = pAllStates[i];
@@ -68,10 +68,10 @@ public class AiStateManager: MonoBehaviour
         }
     }
 
-    private void ComputeEachAiStateBehaviour(List<AiState> pAllStates)
+    private void ComputeEachAiStateBehaviour(List<State> pAllStates)
     {
         int lLength = pAllStates.Count;
-        AiState lState;
+        State lState;
         for(int i = 0 ; (i) < lLength ; i++)
         {
             lState = pAllStates[i];
@@ -80,4 +80,4 @@ public class AiStateManager: MonoBehaviour
             lState.Behaviour();
         }
     }
-}
+}*/

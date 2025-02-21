@@ -1,11 +1,11 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AiStateAttackEnemy: AiState
+public class StateAttackEnemy: AiState
 {
     private AiStateManager enemyToAttack;
-    private AiStateSpotEnemies AiStateSpotEnemies;
+    private StateSpotEnemies _StateSpotEnemies;
     private Weapon weapon;
     public float gainingSpeed = 0.15f;
 
@@ -13,16 +13,16 @@ public class AiStateAttackEnemy: AiState
     {
         base.Init(pParam);
 
-        // Get the first AiStateSpotEnemies instance (if available)
-        var foundStates = aiStateManager.FindDerivedStates(typeof(AiStateSpotEnemies));
+        // Get the first StateSpotEnemies instance (if available)
+        var foundStates = aiStateManager.FindDerivedStates(typeof(StateSpotEnemies));
 
         if(foundStates.Count > 0)
         {
-            AiStateSpotEnemies = (AiStateSpotEnemies)foundStates[0];  // Cast to AiStateSpotEnemies
+            _StateSpotEnemies = (StateSpotEnemies)foundStates[0];  // Cast to StateSpotEnemies
         }
         else
         {
-            AiStateSpotEnemies = null;  // No matching state found
+            _StateSpotEnemies = null;  // No matching state found
         }
     }
 
@@ -36,13 +36,13 @@ public class AiStateAttackEnemy: AiState
     {
         base.SetChangeState();
         weapon = aiStateManager.aiValues.weapon;
-        if(AiStateSpotEnemies.nearEnemies < 0)
+        if(_StateSpotEnemies.nearEnemies < 0)
             return;
-        enemyToAttack = AiStateSpotEnemies.allEnemies[RandomExtension.RandomInRange(AiStateSpotEnemies.nearEnemies)];
+        enemyToAttack = _StateSpotEnemies.allEnemies[RandomExtension.RandomInRange(_StateSpotEnemies.nearEnemies)];
     }
 
     public override void Behaviour()
     {
         base.Behaviour();
     }
-}
+}*/

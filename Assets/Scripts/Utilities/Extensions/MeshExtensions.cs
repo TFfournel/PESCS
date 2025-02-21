@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeshExtensions: MonoBehaviour
 {
-    ublic private static List<Vector3> GetAllVertices(Mesh mesh)
+    public static List<Vector3> GetAllVertices(Mesh mesh)
     {
         if(mesh == null)
         {

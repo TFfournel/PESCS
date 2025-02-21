@@ -15,11 +15,11 @@ public class ListExtension: MonoBehaviour
         return list;
     }
 
-    public static List<T> LookForType<T>(List<T> objects,bool findAll = false)
+    public static List<T> LookForType<T>(List<MonoBehaviour> objects,bool findAll = false)
     {
         List<T> foundItems = new List<T>();
 
-        foreach(T obj in objects)
+        foreach(MonoBehaviour obj in objects)
         {
             // Check if the object is of type T
             if(obj is T item)
@@ -34,6 +34,32 @@ public class ListExtension: MonoBehaviour
         }
 
         return foundItems;
+    }
+
+    /// <summary>
+    /// use List<Collider> colliders = ListTransformer.Transform(raycastHits, hit => hit.collider);
+
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
+    /// <param name="sourceList"></param>
+    /// <param name="selector"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+
+    public static List<TResult> Transform<TSource, TResult>(List<TSource> sourceList,Func<TSource,TResult> selector)
+    {
+        if(sourceList == null || selector == null)
+            throw new ArgumentNullException("Source list or selector function is null");
+
+        List<TResult> resultList = new List<TResult>();
+
+        foreach(var item in sourceList)
+        {
+            resultList.Add(selector(item));
+        }
+
+        return resultList;
     }
 
     public static List<T> LookForType<T>(List<object> objects,bool findAll = false)

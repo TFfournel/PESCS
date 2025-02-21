@@ -1,8 +1,8 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AiStateSpotEnemies: AiState
+public class StateSpotEnemies: AiState
 {
     public List<AiStateManager> allEnemies = new List<AiStateManager>();
     public float gainingSpeed = .3f;
@@ -30,4 +30,4 @@ public class AiStateSpotEnemies: AiState
     {
         base.Behaviour();
     }
-}
+}*/

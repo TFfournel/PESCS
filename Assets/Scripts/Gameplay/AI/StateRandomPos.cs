@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -7,7 +7,7 @@ using UnityEngine;
 
 using UnityEngine.AI;  // This is the required namespace for NavMesh
 
-public class AiStateRandomPos: AiState
+public class StateRandomPos: AiState
 {
     [Header("Navigation Settings")]
     [SerializeField] private bool useAllAreaMask = true; // Toggle to use all areas
@@ -48,4 +48,4 @@ public class AiStateRandomPos: AiState
     {
         base.Behaviour();
     }
-}
+}*/

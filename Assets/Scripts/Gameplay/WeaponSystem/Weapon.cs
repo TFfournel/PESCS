@@ -38,7 +38,7 @@ public class Weapon: MonoBehaviour
     private void Reload()
     {
         reloading = true;
-        timer.SetTimeUse(State.None,EndingReload,ComputeDelay(),true);
+        timer.SetTimeUse(TimerState.None,EndingReload,ComputeDelay(),true);
     }
 
     private void EndingReload()
@@ -66,7 +66,7 @@ public class Weapon: MonoBehaviour
     {
         SpawnBullet(bulletPrefab,transform.position,transform.forward);
         CountingRemainingBullet();
-        timer.SetTimeUse(State.None,OnShootDelayEnd,ComputeDelay(),false);
+        timer.SetTimeUse(TimerState.None,OnShootDelayEnd,ComputeDelay(),false);
     }
 
     private void OnShootDelayEnd()
@@ -109,7 +109,7 @@ public class Weapon: MonoBehaviour
 
     private void Start()
     {
-        timer = TimeUse.AddTimeUse(gameObject,Shoot,State.None,ComputeDelay(),false);
+        timer = TimeUse.AddTimeUse(gameObject,Shoot,TimerState.None,ComputeDelay(),false);
     }
 
     // Update is called once per frame

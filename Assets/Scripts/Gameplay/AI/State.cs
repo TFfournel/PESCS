@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,9 +30,9 @@ public class ChangeStateEventParam: EventArgs
  public override void Behaviour()
  {
      base.Behaviour();
- }*/
+ }#1#
 
-public class AiState: MonoBehaviour
+public class State: MonoBehaviour
 {
     public float changeToStateFactor;
     private Action behaviourAction = null;
@@ -80,4 +80,4 @@ public class AiState: MonoBehaviour
 
             behaviourAction();
     }
-}
+}*/
