@@ -21,16 +21,16 @@ public class Calculator: MonoBehaviour
         activated = pActivated;
         if(activated)
         {
-            Initialized();
+            Initialize();
         }
     }
 
-    public void Initialized()
+    public virtual void Initialize()
     {
         StartCoroutine(UpdateCoroutine());
     }
 
-    public void Compute()
+    public virtual void Compute()
     {
     }
 

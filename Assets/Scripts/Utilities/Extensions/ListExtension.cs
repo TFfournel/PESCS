@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class ListExtension: MonoBehaviour
 {
@@ -34,6 +35,59 @@ public class ListExtension: MonoBehaviour
         }
 
         return foundItems;
+    }
+
+    public static List<TResult> ExecuteOnEach<T, TResult>(List<T> items,Func<T,TResult> function)
+    {
+        if(items == null)
+            throw new ArgumentNullException(nameof(items));
+        if(function == null)
+            throw new ArgumentNullException(nameof(function));
+
+        List<TResult> results = new List<TResult>();
+        foreach(T item in items)
+        {
+            TResult result;
+            try
+            {
+                result = function(item);
+            }
+            catch(NullReferenceException)
+            {
+                result = default(TResult);
+            }
+            results.Add(result);
+        }
+        return results;
+    }
+
+    public static List<T> RemoveCommon<T>(List<T> source,List<T> removeList)
+    {
+        if(source == null)
+            throw new ArgumentNullException(nameof(source));
+        if(removeList == null)
+            throw new ArgumentNullException(nameof(removeList));
+
+        // Use a HashSet for efficient lookups.
+        HashSet<T> removeSet = new HashSet<T>(removeList);
+        // Filter out items that are in the removeSet.
+        return source.Where(item => !removeSet.Contains(item)).ToList();
+    }
+
+    /// <summary>
+    /// Returns a new list from 'source' that contains only the items present in 'keepList'.
+    /// </summary>
+    public static List<T> KeepOnlyCommon<T>(List<T> source,List<T> keepList)
+    {
+        if(source == null)
+            throw new ArgumentNullException(nameof(source));
+        if(keepList == null)
+            throw new ArgumentNullException(nameof(keepList));
+
+        // Use a HashSet for efficient lookups.
+        HashSet<T> keepSet = new HashSet<T>(keepList);
+        // Filter the source to keep only items that are in the keepSet.
+        return source.Where(item => keepSet.Contains(item)).ToList();
     }
 
     /// <summary>
