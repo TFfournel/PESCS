@@ -11,6 +11,8 @@ public class TrackedValueInfo
 
 public class TrackedValues: MonoBehaviour
 {
+    public Dictionary<string,TrackedValueInfo> trackedValues = new Dictionary<string,TrackedValueInfo>();
+
     public void Awake()
     {
         BehaviourTree lTree = GetXComponent<BehaviourTree>();
@@ -28,7 +30,9 @@ public class TrackedValues: MonoBehaviour
         GetXComponent<Pathfinding>();
     }
 
-    public Dictionary<string,TrackedValueInfo> trackedValues = new Dictionary<string,TrackedValueInfo>();
+    public void SetComponent(string pName)
+    {
+    }
 
     public T GetXComponent<T>() where T : Component
     {
