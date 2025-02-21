@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BehaviourTree: MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class BehaviourTree: MonoBehaviour
     private void Start()
     {
         InitiliazeState();
-        trackedValues = gameObject.AddComponent<TrackedValues>();
+        if(GetComponent<TrackedValues>() == null)
+            trackedValues = gameObject.AddComponent<TrackedValues>();
     }
 
     // Update is called once per frame

@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6314970899084673075}
-  - component: {fileID: -320782340666248370}
+  - component: {fileID: 796653790154750642}
   m_Layer: 0
-  m_Name: New Prefab
+  m_Name: GoToPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-320782340666248370
+--- !u!114 &796653790154750642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,14 +41,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2295675674783582420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84787986038b9e84ab1e8632c1c4e7dd, type: 3}
+  m_Script: {fileID: 11500000, guid: f6626a0cd11a1644ab0fd03a83bad2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
   tag: []
   basePossibleStates: []
   currentlyPossibleStates: []
-  factor: -3.3539026
-  active: 0
-  gainingSpeed: 0.2
+  factor: 0.75540465
+  gainingSpeed: 0.6
   decreaseSpeed: 0.2
+  randomPosRadius: 57.5
+  speed: 5

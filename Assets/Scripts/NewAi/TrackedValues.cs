@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TrackedValueInfo
 {
@@ -10,7 +11,51 @@ public class TrackedValueInfo
 
 public class TrackedValues: MonoBehaviour
 {
+    public void Awake()
+    {
+        BehaviourTree lTree = GetXComponent<BehaviourTree>();
+        lTree.trackedValues = this;
+    }
+
+    public void Start()
+    {
+        InitializeValues();
+    }
+
+    public void InitializeValues()
+    {
+        GetXComponent<NavMeshAgent>();
+        GetXComponent<Pathfinding>();
+    }
+
     public Dictionary<string,TrackedValueInfo> trackedValues = new Dictionary<string,TrackedValueInfo>();
+
+    public T GetXComponent<T>() where T : Component
+    {
+        string typeKey = typeof(T).ToString();
+        T val = null;
+        if(trackedValues.ContainsKey(typeKey))
+        {
+            return trackedValues[typeKey].value as T;  //
+        }
+        TrackedValueInfo lNewInfo = new TrackedValueInfo
+        {
+            GetValueMethod = null
+        };
+        T Component = GetComponent<T>();
+        if(Component != null)
+        {
+            lNewInfo.value = Component;
+        }
+        else
+        {
+            lNewInfo.value = gameObject.AddComponent<T>();  //
+        }
+
+        trackedValues.Add(typeKey,lNewInfo);
+        val = lNewInfo.value as T;
+        return val;  //
+    }
 
     public T CheckForTrackValues<T>(string pValueName)
     {
@@ -25,26 +70,5 @@ public class TrackedValues: MonoBehaviour
         }
 
         return default;
-    }
-
-    public T GetXComponent<T>() where T : Component
-    {
-        string typeKey = typeof(T).ToString();
-
-        if(trackedValues.ContainsKey(typeKey))
-        {
-            return trackedValues[typeKey].value as T;  //
-        }
-
-        TrackedValueInfo lNewInfo = new TrackedValueInfo
-        {
-            GetValueMethod = null
-        };
-
-        lNewInfo.value = gameObject.AddComponent<T>();  //
-
-        trackedValues.Add(typeKey,lNewInfo);
-
-        return lNewInfo.value as T;  //
     }
 }
