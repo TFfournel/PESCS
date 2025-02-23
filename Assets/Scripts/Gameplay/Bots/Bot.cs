@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class Bot : MonoBehaviour
 {
     public enum Team { Red, Blue }
-    public Team CurrentTeam { get; set; }
+    [SerializeField] public Team CurrentTeam = Team.Red;
+    [SerializeField] private BlueTeam _BlueTeam;
+    [SerializeField] private RedTeam _RedTeam;
 
     [Header("Movement")]
     [SerializeField] private float _MaxMovementSpeed;
@@ -22,9 +25,18 @@ public class Bot : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private bool UseTarget = false;
 
+    [Header("Sites")]
+    [SerializeField] private BoxCollider siteACollider;
+    [SerializeField] private BoxCollider siteBCollider;
+    public enum Site { SiteA, SiteB }
+    [SerializeField] public Site CurrentSite = Site.SiteA;
+    
+
+    private Action _Action;
 
     private void Start()
     {
+        SetChoosePointState();
         SetNavMeshAgent();
     }
 
@@ -38,7 +50,8 @@ public class Bot : MonoBehaviour
 
     private void Update()
     {
-        PathFinding();
+        _Action();
+        //PathFinding();
         DebugPathRay();
     }
 
@@ -95,22 +108,36 @@ public class Bot : MonoBehaviour
     #region ChoosePoint
     private void SetChoosePointState()
     {
-
+        _Action = ChoosePointState;
     }
     private void ChoosePointState()
     {
+        CurrentSite = (Site)Random.Range(0, 2);
+        if (CurrentTeam == Team.Red) { CurrentSite = (Site)_RedTeam.GetSite(); }
 
+        BoxCollider selectedCollider = (CurrentSite == Site.SiteA) ? siteACollider : siteBCollider;
+
+        Vector3 randomPoint = GetRandomPointOnBoxCollider(selectedCollider);
+
+        agent.SetDestination(randomPoint);
+
+        SetMoveToPointState();
     }
     #endregion
 
     #region MoveToPoint
     private void SetMoveToPointState()
     {
-
+        _Action = MoveToPointState;
     }
+
     private void MoveToPointState()
     {
-
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            if (CurrentTeam == Team.Blue) SetHoldState();
+            else SetChoosePointState();
+        }
     }
     #endregion
 
@@ -125,5 +152,26 @@ public class Bot : MonoBehaviour
     }
     #endregion
 
+    #region Hold
+    private void SetHoldState()
+    {
+        _Action = HoldState;
+    }
+    private void HoldState()
+    {
+    }
     #endregion
+
+    #endregion
+
+    private Vector3 GetRandomPointOnBoxCollider(BoxCollider boxCollider)
+    {
+        Bounds bounds = boxCollider.bounds;
+
+        float randomX = Random.Range(bounds.min.x, bounds.max.x);
+        float randomY = Random.Range(bounds.min.y, bounds.max.y);
+        float randomZ = Random.Range(bounds.min.z, bounds.max.z);
+
+        return new Vector3(randomX, randomY, randomZ);
+    }
 }
