@@ -30,7 +30,17 @@ public class Bot : MonoBehaviour
     [SerializeField] private BoxCollider siteBCollider;
     public enum Site { SiteA, SiteB }
     [SerializeField] public Site CurrentSite = Site.SiteA;
-    
+
+
+
+    [Header("FieldOfView")]
+    [SerializeField] public float fovAngle = 60;
+    [SerializeField] public float fovRange = 2.6f;
+    [SerializeField] public Vector2 lookDirection = Vector2.down;
+    [SerializeField] private CapsuleCollider _DetectionColider;
+    private List<Bot> _DsetectedBots = new List<Bot>();
+
+
 
     private Action _Action;
 
@@ -38,6 +48,7 @@ public class Bot : MonoBehaviour
     {
         SetChoosePointState();
         SetNavMeshAgent();
+        SetDetectionZone();
     }
 
     private void SetNavMeshAgent()
@@ -46,6 +57,10 @@ public class Bot : MonoBehaviour
         agent.angularSpeed = _MaxAngularSpeed;
         agent.acceleration = _MaxAccelerationSpeed;
         agent.stoppingDistance = _StoppingDistance;
+    }
+    private void SetDetectionZone()
+    {
+        _DetectionColider.radius = fovRange;
     }
 
     private void Update()
@@ -174,4 +189,44 @@ public class Bot : MonoBehaviour
 
         return new Vector3(randomX, randomY, randomZ);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Bot otherBot = other.GetComponent<Bot>();
+        if (otherBot != null && otherBot.CurrentTeam != this.CurrentTeam)
+        {
+            if (!_DsetectedBots.Contains(otherBot))
+            {
+                _DsetectedBots.Add(otherBot);
+                Debug.Log($"Detected enemy bot from team {otherBot.CurrentTeam}");
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Bot otherBot = other.GetComponent<Bot>();
+        if (otherBot != null && _DsetectedBots.Contains(otherBot))
+        {
+            _DsetectedBots.Remove(otherBot);
+            Debug.Log($"Enemy bot from team {otherBot.CurrentTeam} left detection zone");
+        }
+    }
+
+    public bool IsTargetInsideFOV(Transform target)
+    {
+        Vector2 directionToTarget = (target.position - transform.position).normalized;
+
+        float angleToTarget = Vector2.Angle(lookDirection, directionToTarget);
+
+        if (angleToTarget < fovAngle / 2)
+        {
+            float distance = Vector2.Distance(target.position, transform.position);
+
+            return distance < fovRange;
+        }
+
+        return false;
+    }
+
 }

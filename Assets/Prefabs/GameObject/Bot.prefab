@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6095527235041063536}
   - component: {fileID: 7279611979256249358}
   - component: {fileID: 4687330083237492012}
+  - component: {fileID: 6578866027265794422}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Untagged
@@ -97,6 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80417194bc3075340868a71903217f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentTeam: 0
+  _BlueTeam: {fileID: 0}
+  _RedTeam: {fileID: 0}
   _MaxMovementSpeed: 3.5
   _MaxAngularSpeed: 120
   _MaxAccelerationSpeed: 8
@@ -104,6 +108,13 @@ MonoBehaviour:
   agent: {fileID: 4687330083237492012}
   target: {fileID: 0}
   UseTarget: 0
+  siteACollider: {fileID: 0}
+  siteBCollider: {fileID: 0}
+  CurrentSite: 0
+  fovAngle: 60
+  fovRange: 2.6
+  lookDirection: {x: 0, y: -1}
+  _DetectionColider: {fileID: 6578866027265794422}
 --- !u!195 &4687330083237492012
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -126,3 +137,26 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &6578866027265794422
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808101675180914789}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
