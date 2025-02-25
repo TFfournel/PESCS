@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum State
+public enum TimerState
 {
     None, CallEveryXTime
 }
@@ -12,7 +12,7 @@ public class TimeUse: MonoBehaviour
 {
     public TimeManager TimeManager;
     public bool activated;
-    public State state;
+    public TimerState state;
     public float delay;
     public float apparitionTime;
     public EventHandler OnEventFired;
@@ -39,7 +39,7 @@ public class TimeUse: MonoBehaviour
             return;
         }
 
-        if(state == State.CallEveryXTime)
+        if(state == TimerState.CallEveryXTime)
         {
             SetTimeUse(state,MethodCall,delay,destroyAfterUse);
         }
@@ -75,14 +75,14 @@ public class TimeUse: MonoBehaviour
         return activated;
     }
 
-    public static TimeUse AddTimeUse(GameObject pContainer,Action pMethodToCall,State pState,float pDelay,bool pDestroyAfterUse)
+    public static TimeUse AddTimeUse(GameObject pContainer,Action pMethodToCall,TimerState pState,float pDelay,bool pDestroyAfterUse)
     {
         TimeUse lTimeUse = pContainer.AddComponent<TimeUse>();
         TimeManager.GetInstance().allActiveTimeUse.Add(lTimeUse);
         return lTimeUse;
     }
 
-    public void SetTimeUse(State pState,Action pMethodToCall,float pDelay,bool pDestroyAfterUse = false)
+    public void SetTimeUse(TimerState pState,Action pMethodToCall,float pDelay,bool pDestroyAfterUse = false)
     {
         MethodCall = pMethodToCall;
         state = pState;

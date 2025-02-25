@@ -26,7 +26,7 @@ public class Weapon: MonoBehaviour
     private TimeUse timer;
 
     private bool reloading = false;
-    private int remainingBullet;
+    public int remainingBullet;
     private float burstModulo; //set to 0 everytime the delay needs to be burstDelay
     private int countSinceLastBurst;
 
@@ -38,7 +38,7 @@ public class Weapon: MonoBehaviour
     private void Reload()
     {
         reloading = true;
-        timer.SetTimeUse(State.None,EndingReload,ComputeDelay(),true);
+        timer.SetTimeUse(TimerState.None,EndingReload,ComputeDelay(),true);
     }
 
     private void EndingReload()
@@ -55,11 +55,18 @@ public class Weapon: MonoBehaviour
         Debug.Log("shoot");
     }
 
+    public void ShootOnPosRequest(Vector3 pPosition)
+    {
+        Quaternion lRotation = Quaternion.LookRotation(VectorExtensions.Direction(transform.position,pPosition).normalized);
+        transform.rotation = lRotation;
+        ShootRequest();
+    }
+
     private void Shoot()
     {
         SpawnBullet(bulletPrefab,transform.position,transform.forward);
         CountingRemainingBullet();
-        timer.SetTimeUse(State.None,OnShootDelayEnd,ComputeDelay(),false);
+        timer.SetTimeUse(TimerState.None,OnShootDelayEnd,ComputeDelay(),false);
     }
 
     private void OnShootDelayEnd()
@@ -102,7 +109,10 @@ public class Weapon: MonoBehaviour
 
     private void Start()
     {
-        timer = TimeUse.AddTimeUse(gameObject,Shoot,State.None,ComputeDelay(),false);
+        timer = TimeUse.AddTimeUse(gameObject,Shoot,TimerState.None,ComputeDelay(),false);
+        TrackedValues TrackedValues = GetComponentInParent<TrackedValues>();
+        TrackedValues.GetXComponent<Weapon>(this);
+        TrackedValues.weapon = this;
     }
 
     // Update is called once per frame

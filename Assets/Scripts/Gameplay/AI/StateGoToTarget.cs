@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +9,7 @@ public class SerialiAiStateGoToTargetParam: AiStateParameter
     public Vector3 target;
 }
 
-public class AiStateGoToTarget: AiState
+public class StateGoToTarget: AiState
 {
     private Vector3 target;
     public bool activated = true;
@@ -29,4 +29,4 @@ public class AiStateGoToTarget: AiState
     {
         //  aiStateManager.aiValues.bot.SetTarget(new Transform(target));
     }
-}
+}*/

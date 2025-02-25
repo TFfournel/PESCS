@@ -17,13 +17,14 @@ public class Pathfinding: MonoBehaviour
 
     [SerializeField] private Vector3 target;
 
-    public bool active = true;
+    public bool active = false;
 
     public void SetTarget(Vector3 pTarget,bool pSetActive = true)
     {
         target = pTarget;
         if(pSetActive)
             SetActive(true);
+        agent.SetDestination(target);
     }
 
     public void SetActive(bool pActive)
@@ -40,20 +41,22 @@ public class Pathfinding: MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(active)
-            AgentCompute();
+        /*if(active)
+            AgentCompute();*/
     }
 
     private void AgentCompute()
     {
-        agent.SetDestination(target);
     }
 
     private void SetNavMeshAgent()
     {
-        agent.speed = speed;
+        agent = GetComponent<NavMeshAgent>();
+        if(agent == null)
+            agent = gameObject.AddComponent<NavMeshAgent>();
+        /*agent.speed = speed;
         agent.angularSpeed = _MaxAngularSpeed;
         agent.acceleration = _MaxAccelerationSpeed;
-        agent.stoppingDistance = _StoppingDistance;
+        agent.stoppingDistance = _StoppingDistance;*/
     }
 }

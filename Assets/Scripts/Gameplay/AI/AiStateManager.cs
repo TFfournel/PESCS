@@ -1,11 +1,12 @@
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AiStateManager: MonoBehaviour
 {
-    private List<AiState> aiStates = new List<AiState>();
-    private List<AiState> AiStateCurrent = new List<AiState>();
+    public List<State> aiStates = new List<State>();
+    private List<State> AiStateCurrent = new List<State>();
     public AiValues aiValues;
 
     // Start is called before the first frame update
@@ -21,10 +22,10 @@ public class AiStateManager: MonoBehaviour
         ComputeEachAiStateBehaviour(AiStateCurrent);
     }
 
-    private void InitializeEachState(List<AiState> pAllStates)
+    private void InitializeEachState(List<State> pAllStates)
     {
         int lLength = pAllStates.Count;
-        AiState lState;
+        State lState;
         for(int i = 0 ; (i) < lLength ; i++)
         {
             lState = pAllStates[i];
@@ -33,27 +34,50 @@ public class AiStateManager: MonoBehaviour
         }
     }
 
-    private void ComputeEachAiStateFactor(List<AiState> pAllStates)
+    public List<State> FindDerivedStates(Type targetType)
+    {
+        // Ensure the targetType is a subclass of State
+        if(!typeof(State).IsAssignableFrom(targetType))
+        {
+            throw new ArgumentException($"{targetType.Name} is not a subclass of State.");
+        }
+
+        var foundStates = new List<State>();
+
+        foreach(var state in aiStates)
+        {
+            // Check if the object can be cast to the desired type
+            if(state != null && targetType.IsInstanceOfType(state))
+            {
+                foundStates.Add(state);
+            }
+        }
+
+        return foundStates;
+    }
+
+    private void ComputeEachAiStateFactor(List<State> pAllStates)
     {
         int lLength = pAllStates.Count;
-        AiState lState;
+        State lState;
         for(int i = 0 ; (i) < lLength ; i++)
         {
             lState = pAllStates[i];
 
-            lState.ChangeToStateFactorCompute();
+            lState.Factor();
         }
     }
 
-    private void ComputeEachAiStateBehaviour(List<AiState> pAllStates)
+    private void ComputeEachAiStateBehaviour(List<State> pAllStates)
     {
         int lLength = pAllStates.Count;
-        AiState lState;
+        State lState;
         for(int i = 0 ; (i) < lLength ; i++)
         {
             lState = pAllStates[i];
-
+            if(!lState.stateActive)
+                return;
             lState.Behaviour();
         }
     }
-}
+}*/

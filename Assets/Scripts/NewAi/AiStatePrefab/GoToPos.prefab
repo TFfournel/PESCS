@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1143627893543902587
+--- !u!1 &2295675674783582420
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8831251708527443583}
-  - component: {fileID: 8699730688302295742}
+  - component: {fileID: 6314970899084673075}
+  - component: {fileID: 796653790154750642}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: GoToPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8831251708527443583
+--- !u!4 &6314970899084673075
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1143627893543902587}
+  m_GameObject: {fileID: 2295675674783582420}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,23 +32,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8699730688302295742
+--- !u!114 &796653790154750642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1143627893543902587}
+  m_GameObject: {fileID: 2295675674783582420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ba9f4c6fd1dda24bae98e9e9a489fca, type: 3}
+  m_Script: {fileID: 11500000, guid: f6626a0cd11a1644ab0fd03a83bad2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 7506380230868553527, guid: 87c58297a7a138d44a642d16fd521130, type: 3}
-  totalAmo: 100
-  burstBulletAmount: 1
-  burstDelay: 2
-  intraBurstBulletDelay: 2
-  reloadTime: 2
-  magSize: 30
-  autoReload: 1
+  index: 0
+  tag: []
+  basePossibleStates: []
+  currentlyPossibleStates: []
+  factor: 0.75540465
+  gainingSpeed: 0.6
+  decreaseSpeed: 0.2
+  randomPosRadius: 57.5
+  speed: 5
