@@ -16,7 +16,7 @@ public class AiStateGoToPos: AiStateBaseIncrease
         {
             behaviourTree.trackedValues.GetXComponent<Pathfinding>(typeof(Pathfinding)).SetTarget(targetPos);
         }*/
-        targetPos = RandomExtension.RandomPointInSphere(transform.position,randomPosRadius);
+        targetPos = RandomExtension.RandomPointInSphere(behaviourTree.transform.position,randomPosRadius);
         Debug.Log("target pos" + targetPos);
 
         Pathfinding lPath = behaviourTree.trackedValues.GetXComponent<Pathfinding>();

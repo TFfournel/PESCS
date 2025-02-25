@@ -6,6 +6,7 @@ public class Calculator: MonoBehaviour
 {
     public float updateFrequency = 1;
     public bool activated = true;
+    public string className;
 
     private IEnumerator UpdateCoroutine()
     {
@@ -28,6 +29,7 @@ public class Calculator: MonoBehaviour
     public virtual void Initialize()
     {
         StartCoroutine(UpdateCoroutine());
+        className = GetType().ToString();
     }
 
     public virtual void Compute()

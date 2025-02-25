@@ -110,6 +110,9 @@ public class Weapon: MonoBehaviour
     private void Start()
     {
         timer = TimeUse.AddTimeUse(gameObject,Shoot,TimerState.None,ComputeDelay(),false);
+        TrackedValues TrackedValues = GetComponentInParent<TrackedValues>();
+        TrackedValues.GetXComponent<Weapon>(this);
+        TrackedValues.weapon = this;
     }
 
     // Update is called once per frame

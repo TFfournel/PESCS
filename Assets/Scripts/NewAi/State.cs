@@ -9,11 +9,13 @@ public class OnStateChangeParam: EventArgs
     public bool active;
 }
 
-public class State: MonoBehaviour
+[Serializable]
+public class State
 {
     //[Serializable] public class
     public int index;
 
+    public string className;
     public List<string> tag;
     public List<string> basePossibleStates;
     public List<string> currentlyPossibleStates;
@@ -26,6 +28,7 @@ public class State: MonoBehaviour
     public void SetBehaviourTree(BehaviourTree pTree)
     {
         behaviourTree = pTree;
+        className = GetType().ToString();
     }
 
     public void SetOtherValues(List<string> tags,List<float> values)

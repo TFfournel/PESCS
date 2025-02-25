@@ -11,6 +11,23 @@ public class DebugExtension: MonoBehaviour
         }
     }
 
+    public static void DebugDictionary<TKey, TValue>(Dictionary<TKey,TValue> dictionary)
+    {
+        if(dictionary == null)
+        {
+            Debug.Log("Dictionary is null.");
+            return;
+        }
+
+        Debug.Log("Dictionary contents:");
+        foreach(KeyValuePair<TKey,TValue> kvp in dictionary)
+        {
+            string keyStr = kvp.Key != null ? kvp.Key.ToString() : "null";
+            string valueStr = kvp.Value != null ? kvp.Value.ToString() : "null";
+            Debug.Log("Key: " + keyStr + " | Value: " + valueStr);
+        }
+    }
+
     /// <summary>
     /// Draws a box using Debug.DrawLine given a center and size.
     /// </summary>

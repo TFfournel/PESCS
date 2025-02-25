@@ -5,11 +5,13 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.AI;
+using Newtonsoft.Json;
+using static UnityEngine.UI.Image;
 
 public class BehaviourTree: MonoBehaviour
 {
     // Start is called before the first frame update
-    public List<GameObject> statesFactory = new List<GameObject>();
+    // public List<GameObject> statesFactory = new List<GameObject>();
 
     public List<State> states = new List<State>();
 
@@ -28,6 +30,14 @@ public class BehaviourTree: MonoBehaviour
         InitializeCalculator();
         if(GetComponent<TrackedValues>() == null)
             trackedValues = gameObject.AddComponent<TrackedValues>();
+    }
+
+    public static List<T> DeepCopy<T>(List<T> original)
+    {
+        if(original == null)
+            return null;
+        string json = JsonConvert.SerializeObject(original);
+        return JsonConvert.DeserializeObject<List<T>>(json);
     }
 
     // Update is called once per frame
@@ -53,10 +63,42 @@ public class BehaviourTree: MonoBehaviour
     {
         int lLength = calculator.Count;
         Calculator lCalculator;
+        calculator = DeepCopy<Calculator>(calculator);
+
         for(int i = 0 ; i < lLength ; i++)
         {
             lCalculator = calculator[i];
             activeCalculator.Add(i);
+            trackedValues.GetXComponent(nameof(lCalculator.name));
+        }
+    }
+
+    /// <summary>
+    /// add subscriber to on change state
+    /// add state to active list
+    /// set state behaviour tree value to this
+    /// </summary>
+    private void InitiliazeState()
+    {
+        /*int lLength = statesFactory.Count;
+        for(int i = 0 ; i < lLength ; i++)
+        {
+            states.Add(AddMissingStates(statesFactory[i],states));
+        }*/
+
+        int lLength = states.Count;
+        State lState;
+        states = DeepCopy<State>(states);
+        for(int i = 0 ; i < lLength ; i++)
+        {
+            lState = states[i];
+            lState.onChangeState += ONStateChange;
+            lState.index = i;
+            activeStates.Add(i);
+            lState.SetBehaviourTree((BehaviourTree)this);
+            trackedValues.GetXComponent(nameof(lState.className));
+
+            ;
         }
     }
 
@@ -106,6 +148,7 @@ public class BehaviourTree: MonoBehaviour
         }
     }
 
+    /*
     public void AddMissingStates(GameObject go,List<State> stateList)
     {
         // Get all State components attached to the GameObject.
@@ -141,32 +184,7 @@ public class BehaviourTree: MonoBehaviour
             field.SetValue(destination,value);
         }
     }
-
-    /// <summary>
-    /// add subscriber to on change state
-    /// add state to active list
-    /// set state behaviour tree value to this
-    /// </summary>
-    private void InitiliazeState()
-    {
-        /*int lLength = statesFactory.Count;
-        for(int i = 0 ; i < lLength ; i++)
-        {
-            states.Add(AddMissingStates(statesFactory[i],states));
-        }*/
-
-        int lLength = states.Count;
-        State lState;
-        for(int i = 0 ; i < lLength ; i++)
-        {
-            lState = states[i];
-            lState.onChangeState += ONStateChange;
-            lState.index = i;
-            activeStates.Add(i);
-            lState.SetBehaviourTree((BehaviourTree)this);
-            ;
-        }
-    }
+    */
 
     /*public State Clone()
     {

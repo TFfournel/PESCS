@@ -5,7 +5,7 @@ using UnityEngine;
 public class CalculatorVision: Calculator
 {
     private List<Collider> visionCollider;
-    private List<GameObject> spotedObjects = new List<GameObject>();
+    public List<GameObject> spotedObjects = new List<GameObject>();
     public BoxColliderCreationParam pColliderCreationParam;
 
     public override void Initialize()
@@ -15,6 +15,7 @@ public class CalculatorVision: Calculator
 
     public override void Compute()
     {
+        Debug.Log("spot object" + spotedObjects.Count);
         base.Compute();
         startPos = transform.position + transform.rotation * offset;
         if(startFromBorder)
