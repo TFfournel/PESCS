@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CalculatorVision: Calculator
+public class VisionComputor: Computor
 {
     private List<Collider> visionCollider;
     public List<GameObject> spotedObjects = new List<GameObject>();
     public BoxColliderCreationParam pColliderCreationParam;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
+    public Vector3 offset;
+    public bool startFromBorder = true;
+    private Vector3 startPos;
+    private Collider collider;
 
-    public override void Compute()
+    public override void compute()
     {
-        base.Compute();
         startPos = transform.position + transform.rotation * offset;
         if(startFromBorder)
             startPos += transform.rotation * VectorExtensions.Multiply(pColliderCreationParam.size / 2,new Vector3(1,0,1));
@@ -41,9 +40,4 @@ public class CalculatorVision: Calculator
         }
         return raycastedObjects;
     }
-
-    public Vector3 offset;
-    public bool startFromBorder = true;
-    private Vector3 startPos;
-    private Collider collider;
 }

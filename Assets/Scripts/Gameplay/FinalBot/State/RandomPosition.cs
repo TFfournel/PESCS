@@ -1,12 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RandomPosition: Statee
 {
+    [Header("Navigation Settings")]
+    [SerializeField] private bool useAllAreaMask = true; // Toggle to use all areas
+
+    [SerializeField] private int specificAreaMask = NavMesh.AllAreas; // Specific area mask to use when not using all
+    public float gainingSpeed = .3f;
+    public float searchDistance = 100f;
+
     public override void SetMode()
     {
         base.SetMode();
+
+        Vector3 randomPos = RandomExtension.RandomPointInSphere(transform.position,searchDistance);
+
+        // Decide which area mask to use
+        int areaMask = useAllAreaMask ? NavMesh.AllAreas : specificAreaMask;
+
+        // Get the closest valid NavMesh position
+        randomPos = NavMeshExtensions.ClosestNavMeshPos(randomPos,searchDistance,areaMask).position;
+        Pathfinding lPathfinding = stateManager.GetComponent<Pathfinding>();
+        if(lPathfinding is null)
+            stateManager.AddComponent<Pathfinding>();
+        lPathfinding.SetTarget(randomPos);
     }
 
     public override void DoAction()

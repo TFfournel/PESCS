@@ -6,9 +6,13 @@ public class StateManager: MonoBehaviour
 {
     private List<Statee> states = new List<Statee>();
     private List<int> activeState = new List<int>();
+    private List<Computor> computor = new List<Computor>();
+    public BotStats botStats;
 
     private void Start()
     {
+        InitializeAllState();
+        botStats = GetComponent<BotStats>();
     }
 
     // Update is called once per frame
@@ -18,7 +22,30 @@ public class StateManager: MonoBehaviour
         StateDoAction();
     }
 
+    private void ComputeAll()
+    {
+        int lLength = computor.Count;
+        Computor lComputor;
+        for(int i = 0 ; i < lLength ; i++)
+        {
+            lComputor = computor[i];
+            lComputor.compute();
+        }
+    }
+
+    private void InitializeAllState()
+    {
+        int lLength = states.Count;
+        Statee lState;
+        for(int i = 0 ; i < lLength ; i++)
+        {
+            lState = states[i];
+            lState.Initialize(this);
+        }
+    }
+
     private void StateDoAction()
+
     {
         int lLength = activeState.Count;
         Statee lState;
