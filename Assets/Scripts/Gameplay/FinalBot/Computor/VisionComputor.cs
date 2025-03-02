@@ -24,7 +24,7 @@ public class VisionComputor: Computor
         spotedObjects = ListExtension.ExecuteOnEach(visionCollider,hit => hit.gameObject);
 
         spotedObjects = RaycastCheck(spotedObjects);
-        DebugExtension.DrawBox(pColliderCreationParam.center,pColliderCreationParam.size,Color.gray,updateFrequency);
+        DebugExtension.DrawBox(pColliderCreationParam.center,pColliderCreationParam.size,Color.gray);
     }
 
     private List<GameObject> RaycastCheck(List<GameObject> objectToCheck)
@@ -36,7 +36,7 @@ public class VisionComputor: Computor
         raycastedObjects = ListExtension.KeepOnlyCommon<GameObject>(objectToCheck,lObject);
         foreach(GameObject VARIABLE in raycastedObjects)
         {
-            DebugExtension.DrawLine(transform.position,VARIABLE.transform.position,Color.red,updateFrequency);
+            DebugExtension.DrawLine(transform.position,VARIABLE.transform.position,Color.red);
         }
         return raycastedObjects;
     }

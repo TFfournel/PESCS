@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
-using Vector3 = UnityEngine.Vector3;
 
-public class ShootOnPos: StateFactorBaseIncrease
+public class StateFactorBaseIncrease: Statee
 {
-    public Vector3 targetPos;
+    public float baseIncrease = 100;
 
     public override void Initialize(StateManager lManager)
     {
@@ -16,8 +14,7 @@ public class ShootOnPos: StateFactorBaseIncrease
     public override void SetMode()
     {
         base.SetMode();
-        targetPos = transform.forward;
-        stateManager.botStats.currentWeapon.ShootOnPosRequest(targetPos);
+        factor = 1;
     }
 
     public override void DoAction()
@@ -28,6 +25,9 @@ public class ShootOnPos: StateFactorBaseIncrease
     public override float FactorCalculation()
     {
         base.FactorCalculation();
+        factor += baseIncrease * Time.deltaTime;
+        Debug.Log(name + "factor" + factor);
+
         return factor;
     }
 }

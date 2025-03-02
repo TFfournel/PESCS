@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RandomPosition: Statee
+public class RandomPosition: StateFactorBaseIncrease
 {
     [Header("Navigation Settings")]
     [SerializeField] private bool useAllAreaMask = true; // Toggle to use all areas
@@ -25,8 +25,8 @@ public class RandomPosition: Statee
         // Get the closest valid NavMesh position
         randomPos = NavMeshExtensions.ClosestNavMeshPos(randomPos,searchDistance,areaMask).position;
         Pathfinding lPathfinding = stateManager.GetComponent<Pathfinding>();
-        if(lPathfinding is null)
-            stateManager.AddComponent<Pathfinding>();
+        if(lPathfinding == null)
+            lPathfinding = stateManager.AddComponent<Pathfinding>();
         lPathfinding.SetTarget(randomPos);
     }
 

@@ -29,6 +29,7 @@ public class Statee: MonoBehaviour
 {
     public StateManager stateManager;
     public float factor = 0;
+    public bool resetFactorOnSetMode = true;
 
     public virtual void Initialize(StateManager lManager)
     {

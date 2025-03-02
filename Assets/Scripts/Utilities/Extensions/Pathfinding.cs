@@ -6,11 +6,11 @@ using UnityEngine.AI;
 public class Pathfinding: MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float speed;
+    [SerializeField] private float speed = 50;
 
-    [SerializeField] private float _MaxAngularSpeed;
-    [SerializeField] private float _MaxAccelerationSpeed;
-    [SerializeField] private float _StoppingDistance;
+    [SerializeField] private float _MaxAngularSpeed = 50;
+    [SerializeField] private float _MaxAccelerationSpeed = 50;
+    [SerializeField] private float _StoppingDistance = 50;
 
     [Header("PathFinding")]
     [SerializeField] private NavMeshAgent agent;
@@ -24,7 +24,7 @@ public class Pathfinding: MonoBehaviour
         target = pTarget;
         if(pSetActive)
             SetActive(true);
-        agent.SetDestination(target);
+        agent?.SetDestination(target);
     }
 
     public void SetActive(bool pActive)
@@ -32,10 +32,14 @@ public class Pathfinding: MonoBehaviour
         active = pActive;
     }
 
+    private void Awake()
+    {
+        SetNavMeshAgent();
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
-        SetNavMeshAgent();
     }
 
     // Update is called once per frame
