@@ -12,6 +12,7 @@ public class BulletParameter()
 public class Bullet: Moving
 {
     public float damage;
+    public GameObject destroyParticle;
 
     public Bullet(float damage)
     {
@@ -36,5 +37,15 @@ public class Bullet: Moving
         base.Update();
         if(GetVelocity() != Vector3.zero)
             Debug.Log("bullet velocity" + GetVelocity());
+    }
+
+    private void OnTriggerEnter(Collision collision)
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        GameObject lObject = Instantiate(destroyParticle,transform.position,Quaternion.identity);
     }
 }

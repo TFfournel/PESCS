@@ -12,7 +12,7 @@ public class Weapon: MonoBehaviour
 
     public int totalAmo = 100;
     public int burstBulletAmount = 1;
-
+    public Transform startPos;
     public float burstDelay = 1f;
     public float intraBurstBulletDelay;
 
@@ -64,7 +64,7 @@ public class Weapon: MonoBehaviour
 
     private void Shoot()
     {
-        SpawnBullet(bulletPrefab,transform.position,transform.forward);
+        SpawnBullet(bulletPrefab,startPos.position,transform.forward);
         CountingRemainingBullet();
         timer.SetTimeUse(TimerState.None,OnShootDelayEnd,ComputeDelay(),false);
     }
