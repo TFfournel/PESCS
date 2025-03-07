@@ -12,11 +12,12 @@ public class AISensor : MonoBehaviour
     [SerializeField] private float _Height = 1f;
     [SerializeField] private int _Segment = 10;
     [SerializeField] private Color _Color = new Color();
-    [SerializeField] private List<GameObject> _Objects = new List<GameObject>();
+    [SerializeField] public List<GameObject> _Objects = new List<GameObject>();
     private Mesh _Mesh;
 
     Collider[] _Colliders = new Collider[10];
     public LayerMask _Layers;
+    public LayerMask _OcclusionLayer;
 
     [SerializeField] private int _ScanFrequency = 30;
     int _Count;
@@ -59,13 +60,20 @@ public class AISensor : MonoBehaviour
         Vector3 lOrigin = transform.position;
         Vector3 lDest = pObject.transform.position;
         Vector3 lDirection = lOrigin - lDest;
-        
-        if (lDirection.y < 0 || lDirection.y> _Height) return false;
+
+        if (lDirection.y < 0 || lDirection.y > _Height) {
+            return false;
+        }
 
         lDirection.y = 0;
-        float lDeltaAnge = Vector3.Angle(lDirection, transform.forward);
-        if (lDeltaAnge > _Angle) return false;
+        float lDeltaAnge = Mathf.Abs(Vector3.Angle(lDirection, -transform.forward));
+        
+        if (lDeltaAnge > _Angle) {
+            return false;
+        }
+        if (Vector3.Distance(lOrigin, pObject.transform.position)> _Distance) { return false; }
 
+        if (Physics.Linecast(transform.position, lDest, _OcclusionLayer)) return false;
         return true;
 
     }
@@ -80,9 +88,9 @@ public class AISensor : MonoBehaviour
         Vector3[] lVertices= new Vector3[lNumVertices];
         int[] lTriangles = new int[lNumVertices];
 
-        Vector3 lBottomCenter = Vector3.zero + Vector3.forward/2;
-        Vector3 lBottomLeft = Quaternion.Euler(0,-_Angle,0) * Vector3.forward * _Distance + Vector3.forward/2; 
-        Vector3 lBottomRight = Quaternion.Euler(0,_Angle,0) * Vector3.forward * _Distance + Vector3.forward/2; 
+        Vector3 lBottomCenter = Vector3.zero;
+        Vector3 lBottomLeft = Quaternion.Euler(0,-_Angle,0) * Vector3.forward * _Distance; 
+        Vector3 lBottomRight = Quaternion.Euler(0,_Angle,0) * Vector3.forward * _Distance; 
 
         Vector3 lTopCenter = lBottomCenter + Vector3.up * _Height;
         Vector3 lTopLeft = lBottomLeft + Vector3.up * _Height;
@@ -112,8 +120,8 @@ public class AISensor : MonoBehaviour
         float lDeltaAngle = (_Angle * 2) / _Segment;
         for (int i = 0; i < _Segment; i++)
         {
-            lBottomLeft = Quaternion.Euler(0, lCurrentAngle, 0) * Vector3.forward * _Distance + Vector3.forward/2;
-            lBottomRight = Quaternion.Euler(0, lCurrentAngle+lDeltaAngle, 0) * Vector3.forward * _Distance + Vector3.forward/2;
+            lBottomLeft = Quaternion.Euler(0, lCurrentAngle, 0) * Vector3.forward * _Distance;
+            lBottomRight = Quaternion.Euler(0, lCurrentAngle+lDeltaAngle, 0) * Vector3.forward * _Distance;
 
             lTopLeft = lBottomLeft + Vector3.up * _Height;
             lTopRight = lBottomRight + Vector3.up * _Height;
@@ -164,10 +172,6 @@ public class AISensor : MonoBehaviour
         {
             Gizmos.color = _Color;
             Gizmos.DrawMesh(_Mesh, transform.position, transform.rotation);
-        }
-        for (int i = 0; i < _Count; i++)
-        {
-            Gizmos.DrawSphere(_Colliders[i].transform.position, 2f);
         }
 
         GUI.color = Color.green;
