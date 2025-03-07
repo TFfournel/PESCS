@@ -39,10 +39,10 @@ public class Bullet: Moving
             Debug.Log("bullet velocity" + GetVelocity());
     }
 
-    private void OnTriggerEnter(Collision collision)
+    /*private void OnTriggerEnter(Collision collision)
     {
         Destroy(gameObject);
-    }
+    }*/
 
     private void OnDestroy()
     {
