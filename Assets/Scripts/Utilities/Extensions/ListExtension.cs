@@ -37,6 +37,43 @@ public class ListExtension: MonoBehaviour
         return foundItems;
     }
 
+    public static void DeleteAllChildren(GameObject parent)
+    {
+        if(parent == null)
+        {
+            Debug.LogWarning("Parent GameObject is null.");
+            return;
+        }
+
+        // Iterate through all child objects
+        foreach(Transform child in parent.transform)
+        {
+            // Destroy the child game object
+            GameObject.Destroy(child.gameObject);
+        }
+    }
+
+    public static void DestroyAllObjects(List<GameObject> lObject)
+    {
+        int lLength = lObject.Count;
+        GameObject lObjectToDelete;
+        for(int i = lLength - 1 ; i >= 0 ; i--)
+        {
+            lObjectToDelete = lObject[i];
+            Destroy(lObjectToDelete);
+        }
+    }
+
+    /// <summary>
+    /// executuon         List<GameObject> lObject = ListExtension.ExecuteOnEach(lRaycastHits,hit => hit.collider.gameObject);
+
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
+    /// <param name="items"></param>
+    /// <param name="function"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public static List<TResult> ExecuteOnEach<T, TResult>(List<T> items,Func<T,TResult> function)
     {
         if(items == null)

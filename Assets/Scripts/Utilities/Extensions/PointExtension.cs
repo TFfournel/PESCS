@@ -5,7 +5,9 @@ using UnityEngine;
 public class Point: MonoBehaviour
 {
     public Vector3 position;
+    public GameObject attachedObject;
     public List<string> tags = new List<string>();
+    public Quaternion rotation = Quaternion.identity;
 }
 
 public class PointExtension: MonoBehaviour
@@ -23,6 +25,31 @@ public class PointExtension: MonoBehaviour
         }
 
         return lAllPoints;
+    }
+
+    public static List<GameObject> AttachGameObjectToPoint(List<Point> pAllPoint,List<GameObject> lOjbectListPool,Transform pTransform = null)
+    {
+        List<GameObject> lOjbectList = new List<GameObject>();
+        foreach(Point lPoint in pAllPoint)
+        {
+            GameObject lObject = lOjbectListPool[RandomExtension.RandomInRange(lOjbectListPool.Count)];
+            if(lPoint.attachedObject != null)
+                Destroy(lPoint.attachedObject);
+            if(pTransform == null)
+                lPoint.attachedObject = Instantiate(lObject,lPoint.position,lPoint.rotation);
+            else
+                lPoint.attachedObject = Instantiate(lObject,lPoint.position,lPoint.rotation,pTransform);
+        }
+
+        return lOjbectList;
+    }
+
+    public static List<GameObject> AttachGameObjectToPoint(List<Point> pAllPoint,GameObject lOjbectListPool,
+        Transform pTransform = null)
+    {
+        List<GameObject> lOjbectList = new List<GameObject>();
+        lOjbectList.Add(lOjbectListPool);
+        return AttachGameObjectToPoint(pAllPoint,lOjbectList,pTransform);
     }
 
     public static List<Point> SelectClosePoint(Point lPoint,List<Point> PointToLoook,float pSearcDistance,bool pExcludeClose)
