@@ -23,6 +23,19 @@ public class StateManager: MonoBehaviour
         CustomUpdate();
     }
 
+    public T FindInstanceOfClass<T>() where T : Statee
+    {
+        // Iterate through the list and check if the object is of type T
+        foreach(var state in states)
+        {
+            if(state is T)
+            {
+                return (T)state; // Cast and return the found instance
+            }
+        }
+        return null; // Return null if no instance of the target class is found
+    }
+
     private void CloneGameObjectAndGetStateComponent()
     {
         foreach(GameObject baseState in statesBase)

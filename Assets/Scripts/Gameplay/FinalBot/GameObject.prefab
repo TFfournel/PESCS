@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6194290609099055075}
   - component: {fileID: 5468987326613100614}
   - component: {fileID: 155324869718689925}
+  - component: {fileID: 3919598147023514033}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -66,6 +67,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   currentWeapon: {fileID: 5798522648374836590}
+  CurrentTeam: 0
+  _BlueTeam: {fileID: 0}
+  _RedTeam: {fileID: 0}
+  siteACollider: {fileID: 0}
+  siteBCollider: {fileID: 0}
+  CurrentSite: 0
 --- !u!195 &155324869718689925
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -88,6 +95,31 @@ NavMeshAgent:
   m_BaseOffset: 0.99
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3919598147023514033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3452827757132036369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4add4ace250b20e4b85c11f373127d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Distance: 10
+  _Angle: 30
+  _Height: 1
+  _Segment: 10
+  _Color: {r: 0, g: 0, b: 0, a: 0}
+  _Objects: []
+  _Layers:
+    serializedVersion: 2
+    m_Bits: 0
+  _OcclusionLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _ScanFrequency: 30
 --- !u!1 &7099197507323251610
 GameObject:
   m_ObjectHideFlags: 0
